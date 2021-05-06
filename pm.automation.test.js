@@ -1,9 +1,10 @@
 // 1. CREATED
-pm.test("Example Test Cases - CREATED", function () {
+pm.test("Create New Coordinator - CREATED", function () {
     pm.response.to.be.success;
     pm.response.to.be.withBody;
     pm.response.to.be.json;
 }, function (err, res) {
+    console.info("CREATED : " + res.responseTime)
     pm.expect(res).to.have.property('code', 201);
     pm.expect(res.json()).to.have.property('status', '01');
     pm.expect(res.json()).to.have.property('httpStatus', 'CREATED');
@@ -11,16 +12,9 @@ pm.test("Example Test Cases - CREATED", function () {
 })
 
 // 2. UNAUTHORIZED
-pm.test("Example Test Cases - UNAUTHORIZED", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+pm.test("Create New Coordinator - UNAUTHORIZED", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json'
@@ -35,39 +29,32 @@ pm.test("Example Test Cases - UNAUTHORIZED", function () {
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "101RDHN" + pm.collectionVariables.get("var_increment"),
-                "phone": "081222123" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "102AUTO" + pm.collectionVariables.get("var_increment"),
+                "phone": "081220102" + pm.collectionVariables.get("var_increment"),
                 "previousNik": "string",
                 "status": "active",
                 "verified": true
             })
         }
     }, function (err, res) {
+        console.info("UNAUTHORIZED : " + res.responseTime)
         pm.expect(res).to.have.property('code', 401); // Unauthorized
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', 'UNAUTHORIZED');
         pm.expect(res.json()).to.have.property('message', 'Full authentication is required to access this resource');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("UNAUTHORIZED : " + res.responseTime)
     });
 })
 
 // 3. Empty Name
-pm.test("Example Test Cases - Empty Name", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+pm.test("Create New Coordinator - Empty Name", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
@@ -79,38 +66,31 @@ pm.test("Example Test Cases - Empty Name", function () {
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
                 "name": "",
-                "nik": "101RDHN" + pm.collectionVariables.get("var_increment"),
-                "phone": "081222123" + pm.collectionVariables.get("var_increment"),
+                "nik": "103AUTO" + pm.collectionVariables.get("var_increment"),
+                "phone": "081220103" + pm.collectionVariables.get("var_increment"),
                 "previousNik": "string",
                 "status": "active",
                 "verified": true
             })
         }
     }, function (err, res) {
+        console.info("Empty Name : " + res.responseTime)
         pm.expect(res).to.have.property('code', 400); // Bad Request
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', null);
         pm.expect(res.json()).to.have.property('message', 'nama tidak boleh kosong');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("Empty Name : " + res.responseTime)
     });
 })
 
 // 4. Empty NIK
-pm.test("Example Test Cases - Empty NIK", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+pm.test("Create New Coordinator - Empty NIK", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
@@ -121,39 +101,32 @@ pm.test("Example Test Cases - Empty NIK", function () {
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
+                "name": "AUTOTEST ENAM MEI",
                 "nik": "",
-                "phone": "081222123" + pm.collectionVariables.get("var_increment"),
+                "phone": "081220104" + pm.collectionVariables.get("var_increment"),
                 "previousNik": "string",
                 "status": "active",
                 "verified": true
             })
         }
     }, function (err, res) {
+        console.info("Empty NIK : " + res.responseTime)
         pm.expect(res).to.have.property('code', 400); // Bad Request
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', null);
         pm.expect(res.json()).to.have.property('message', 'NIK tidak boleh kosong');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("Empty NIK : " + res.responseTime)
     });
 })
 
 // 5. NIK < 10 Character
-pm.test("Example Test Cases - NIK < 10 Character", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+pm.test("Create New Coordinator - NIK < 10 Character", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
@@ -164,82 +137,32 @@ pm.test("Example Test Cases - NIK < 10 Character", function () {
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "" + pm.collectionVariables.get("var_increment"),
-                "phone": "081222123" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "105XX" + pm.collectionVariables.get("var_increment"),
+                "phone": "081220105" + pm.collectionVariables.get("var_increment"),
                 "previousNik": "string",
                 "status": "active",
                 "verified": true
             })
         }
     }, function (err, res) {
-        pm.expect(res).to.have.property('code', 400); // Bad Request
-        pm.expect(res.json()).to.have.property('status', '03');
-        pm.expect(res.json()).to.have.property('httpStatus', null);
-        pm.expect(res.json()).to.have.property('message', 'format NIK tidak sesuai');
-        pm.expect(res.json()).to.have.property('data', null)
         console.info("NIK < 10 Character : " + res.responseTime)
-    });
-})
-
-// 6. Invalid NIK
-pm.test("Example Test Cases - Invalid NIK", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
-    pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
-        method: 'POST',
-        header: {
-            'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
-        },
-        body: {
-            mode: 'raw',
-            raw: JSON.stringify({
-                "createdBy": "rfadhil",
-                "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
-                "id": 0,
-                "lastModifiedBy": "rfadhil",
-                "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": 1 + pm.collectionVariables.get("var_increment"),
-                "phone": "081222123" + pm.collectionVariables.get("var_increment"),
-                "previousNik": "string",
-                "status": "active",
-                "verified": true
-            })
-        }
-    }, function (err, res) {
         pm.expect(res).to.have.property('code', 400); // Bad Request
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', null);
         pm.expect(res.json()).to.have.property('message', 'format NIK tidak sesuai');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("Invalid NIK : " + res.responseTime)
     });
 })
 
-// 7. Existing NIK
-pm.test("Example Test Cases - Existing NIK", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+// 6. NIK > 10 Character
+pm.test("Create New Coordinator - NIK > 10 Character", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
@@ -250,39 +173,104 @@ pm.test("Example Test Cases - Existing NIK", function () {
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "0190390494",
-                "phone": "081222123" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "106AUTOXXXXXX" + pm.collectionVariables.get("var_increment"),
+                "phone": "081220106" + pm.collectionVariables.get("var_increment"),
                 "previousNik": "string",
                 "status": "active",
                 "verified": true
             })
         }
     }, function (err, res) {
+        console.info("NIK > 10 Character : " + res.responseTime)
+        pm.expect(res).to.have.property('code', 400); // Bad Request
+        pm.expect(res.json()).to.have.property('status', '03');
+        pm.expect(res.json()).to.have.property('httpStatus', null);
+        pm.expect(res.json()).to.have.property('message', 'format NIK tidak sesuai');
+        pm.expect(res.json()).to.have.property('data', null)
+    });
+})
+
+// 7. Invalid NIK
+pm.test("Create New Coordinator - Invalid NIK", function () {
+    pm.sendRequest({
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        method: 'POST',
+        header: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+        },
+        body: {
+            mode: 'raw',
+            raw: JSON.stringify({
+                "createdBy": "rfadhil",
+                "createdDate": pm.globals.Now,
+                "email": pm.globals.get('email'),
+                "id": 0,
+                "lastModifiedBy": "rfadhil",
+                "lastModifiedDate": pm.globals.Now,
+                "name": "AUTOTEST ENAM MEI",
+                "nik": 1 + pm.collectionVariables.get("var_increment"),
+                "phone": "081220107" + pm.collectionVariables.get("var_increment"),
+                "previousNik": "string",
+                "status": "active",
+                "verified": true
+            })
+        }
+    }, function (err, res) {
+        console.info("Invalid NIK : " + res.responseTime)
+        pm.expect(res).to.have.property('code', 400); // Bad Request
+        pm.expect(res.json()).to.have.property('status', '03');
+        pm.expect(res.json()).to.have.property('httpStatus', null);
+        pm.expect(res.json()).to.have.property('message', 'format NIK tidak sesuai');
+        pm.expect(res.json()).to.have.property('data', null)
+    });
+})
+
+// 8. Existing NIK
+pm.test("Create New Coordinator - Existing NIK", function () {
+    pm.sendRequest({
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        method: 'POST',
+        header: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+        },
+        body: {
+            mode: 'raw',
+            raw: JSON.stringify({
+                "createdBy": "rfadhil",
+                "createdDate": pm.globals.Now,
+                "email": pm.globals.get('email'),
+                "id": 0,
+                "lastModifiedBy": "rfadhil",
+                "lastModifiedDate": pm.globals.Now,
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "0190390494",
+                "phone": "081220108" + pm.collectionVariables.get("var_increment"),
+                "previousNik": "string",
+                "status": "active",
+                "verified": true
+            })
+        }
+    }, function (err, res) {
+        console.info("Existing NIK : " + res.responseTime)
         pm.expect(res).to.have.property('code', 400); // Bad Request
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', null);
         pm.expect(res.json()).to.have.property('message', 'NIK sudah digunakan');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("Existing NIK : " + res.responseTime)
     });
 })
 
-// 8. Empty Email
-pm.test("Example Test Cases - Empty Email", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+// 9. Empty Email
+pm.test("Create New Coordinator - Empty Email", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
@@ -293,39 +281,32 @@ pm.test("Example Test Cases - Empty Email", function () {
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "101RDHN" + pm.collectionVariables.get("var_increment"),
-                "phone": "081222123" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "109AUTO" + pm.collectionVariables.get("var_increment"),
+                "phone": "081220109" + pm.collectionVariables.get("var_increment"),
                 "previousNik": "string",
                 "status": "active",
                 "verified": true
             })
         }
     }, function (err, res) {
+        console.info("Empty Email : " + res.responseTime)
         pm.expect(res).to.have.property('code', 400); // Bad Request
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', null);
         pm.expect(res.json()).to.have.property('message', 'email tidak boleh kosong');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("Empty Email : " + res.responseTime)
     });
 })
 
-// 9. Invalid Email
-pm.test("Example Test Cases - Invalid Email", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+// 10. Invalid Email
+pm.test("Create New Coordinator - Invalid Email", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
@@ -336,39 +317,32 @@ pm.test("Example Test Cases - Invalid Email", function () {
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "101RDHN" + pm.collectionVariables.get("var_increment"),
-                "phone": "081222123" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "110AUTO" + pm.collectionVariables.get("var_increment"),
+                "phone": "081220110" + pm.collectionVariables.get("var_increment"),
                 "previousNik": "string",
                 "status": "active",
                 "verified": true
             })
         }
     }, function (err, res) {
+        console.info("Invalid Email : " + res.responseTime)
         pm.expect(res).to.have.property('code', 400); // Bad Request
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', null);
         pm.expect(res.json()).to.have.property('message', 'format email tidak sesuai');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("Invalid Email : " + res.responseTime)
     });
 })
 
-// 10. Existing Email
-pm.test("Example Test Cases - Existing Email", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+// 11. Existing Email
+pm.test("Create New Coordinator - Existing Email", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
@@ -379,39 +353,32 @@ pm.test("Example Test Cases - Existing Email", function () {
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "101RDHN" + pm.collectionVariables.get("var_increment"),
-                "phone": "081222123" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "111AUTO" + pm.collectionVariables.get("var_increment"),
+                "phone": "081220111" + pm.collectionVariables.get("var_increment"),
                 "previousNik": "string",
                 "status": "active",
                 "verified": true
             })
         }
     }, function (err, res) {
+        console.info("Existing Email : " + res.responseTime)
         pm.expect(res).to.have.property('code', 400); // Bad Request
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', null);
         pm.expect(res.json()).to.have.property('message', 'email sudah digunakan');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("Existing Email : " + res.responseTime)
     });
 })
 
-// 11. Empty Phone
-pm.test("Example Test Cases - Empty Phone", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+// 12. Empty Phone
+pm.test("Create New Coordinator - Empty Phone", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
@@ -422,8 +389,8 @@ pm.test("Example Test Cases - Empty Phone", function () {
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "101RDHN" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "112AUTO" + pm.collectionVariables.get("var_increment"),
                 "phone": "",
                 "previousNik": "string",
                 "status": "active",
@@ -431,30 +398,23 @@ pm.test("Example Test Cases - Empty Phone", function () {
             })
         }
     }, function (err, res) {
+        console.info("Empty Phone : " + res.responseTime)
         pm.expect(res).to.have.property('code', 400); // Bad Request
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', null);
         pm.expect(res.json()).to.have.property('message', 'No HP tidak boleh kosong');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("Empty Phone : " + res.responseTime)
     });
 })
 
-// 12. Invalid Phone (Char)
-pm.test("Example Test Cases - Invalid Phone (Char)", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+// 13. Invalid Phone (Char)
+pm.test("Create New Coordinator - Invalid Phone (Char)", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
@@ -465,8 +425,8 @@ pm.test("Example Test Cases - Invalid Phone (Char)", function () {
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "101RDHN" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "113AUTO" + pm.collectionVariables.get("var_increment"),
                 "phone": "Ini No HP",
                 "previousNik": "string",
                 "status": "active",
@@ -474,30 +434,23 @@ pm.test("Example Test Cases - Invalid Phone (Char)", function () {
             })
         }
     }, function (err, res) {
+        console.info("Invalid Phone (Char) : " + res.responseTime)
         pm.expect(res).to.have.property('code', 400); // Bad Request
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', null);
         pm.expect(res.json()).to.have.property('message', 'format NO HP tidak sesuai');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("Invalid Phone (Char) : " + res.responseTime)
     });
 })
 
-// 13. Phone < 3 Number
-pm.test("Example Test Cases - Phone < 3 Number", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+// 14. Phone < 3 Number
+pm.test("Create New Coordinator - Phone < 3 Number", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
@@ -508,8 +461,8 @@ pm.test("Example Test Cases - Phone < 3 Number", function () {
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "101RDHN" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "114AUTO" + pm.collectionVariables.get("var_increment"),
                 "phone": "08",
                 "previousNik": "string",
                 "status": "active",
@@ -517,30 +470,23 @@ pm.test("Example Test Cases - Phone < 3 Number", function () {
             })
         }
     }, function (err, res) {
+        console.info("Phone < 3 Number : " + res.responseTime)
         pm.expect(res).to.have.property('code', 400); // Bad Request
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', null);
         pm.expect(res.json()).to.have.property('message', 'format NO HP tidak sesuai');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("Phone < 3 Number : " + res.responseTime)
     });
 })
 
-// 14. Phone Not Start With 08
-pm.test("Example Test Cases - Phone Not Start With 08", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+// 15. Phone Not Start With 08
+pm.test("Create New Coordinator - Phone Not Start With 08", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
@@ -551,39 +497,32 @@ pm.test("Example Test Cases - Phone Not Start With 08", function () {
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "101RDHN" + pm.collectionVariables.get("var_increment"),
-                "phone": "711220123" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "115AUTO" + pm.collectionVariables.get("var_increment"),
+                "phone": "711220115" + pm.collectionVariables.get("var_increment"),
                 "previousNik": "string",
                 "status": "active",
                 "verified": true
             })
         }
     }, function (err, res) {
+        console.info("Phone Not Start With 08 : " + res.responseTime)
         pm.expect(res).to.have.property('code', 400); // Bad Request
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', null);
         pm.expect(res.json()).to.have.property('message', 'format NO HP tidak sesuai');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("Phone Not Start With 08 : " + res.responseTime)
     });
 })
 
-// 15. Existing Phone
-pm.test("Example Test Cases - Existing Phone", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+// 16. Existing Phone
+pm.test("Create New Coordinator - Existing Phone", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
@@ -594,8 +533,8 @@ pm.test("Example Test Cases - Existing Phone", function () {
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "101RDHN" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "116AUTO" + pm.collectionVariables.get("var_increment"),
                 "phone": "0871872234",
                 "previousNik": "string",
                 "status": "active",
@@ -603,30 +542,23 @@ pm.test("Example Test Cases - Existing Phone", function () {
             })
         }
     }, function (err, res) {
+        console.info("Existing Phone : " + res.responseTime)
         pm.expect(res).to.have.property('code', 400); // Bad Request
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', null);
         pm.expect(res.json()).to.have.property('message', 'No HP sudah digunakan');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("Existing Phone : " + res.responseTime)
     });
 })
 
-// 16. Status Inactive
-pm.test("Example Test Cases - Status Inactive", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+// 17. Status Inactive
+pm.test("Create New Coordinator - Status Inactive", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
@@ -637,106 +569,92 @@ pm.test("Example Test Cases - Status Inactive", function () {
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "101RDHN" + pm.collectionVariables.get("var_increment"),
-                "phone": "081222123" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "117AUTO" + pm.collectionVariables.get("var_increment"),
+                "phone": "081220117" + pm.collectionVariables.get("var_increment"),
                 "previousNik": "string",
                 "status": "inactive",
                 "verified": true
             })
         }
     }, function (err, res) {
+        console.info("Status Inactive : " + res.responseTime)
         pm.expect(res).to.have.property('code', 201); // Created
         pm.expect(res.json()).to.have.property('status', '01');
         pm.expect(res.json()).to.have.property('httpStatus', "CREATED");
         pm.expect(res.json()).to.have.property('message', 'success');
         pm.expect(res.json().data).to.have.property('status', 'inactive')
-        console.info("Status Inactive : " + res.responseTime)
     });
 })
 
-// 17. Invalid Status
-pm.test("Example Test Cases - Invalid Status", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+// 18. Invalid Status
+pm.test("Create New Coordinator - Invalid Status", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email17" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "101RDHN" + pm.collectionVariables.get("var_increment"),
-                "phone": "081222123" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "118AUTO" + pm.collectionVariables.get("var_increment"),
+                "phone": "081220118" + pm.collectionVariables.get("var_increment"),
                 "previousNik": "string",
                 "status": "random",
                 "verified": true
             })
         }
     }, function (err, res) {
+        console.info("Invalid Status : " + res.responseTime)
         pm.expect(res).to.have.property('code', 400); // Created
         pm.expect(res.json()).to.have.property('status', '03');
         pm.expect(res.json()).to.have.property('httpStatus', null);
         pm.expect(res.json()).to.have.property('message', 'invalid option');
         pm.expect(res.json()).to.have.property('data', null)
-        console.info("Invalid Status : " + res.responseTime)
     });
 })
 
-// 18. Unverified Account
-pm.test("Example Test Cases - Unverified Account", function () {
-    var value = pm.collectionVariables.get("var_increment");
-    value++
-    pm.collectionVariables.set("var_increment", value);
-
-    const uuid = require('uuid')
-    let email = uuid() + '@domain.com'
-    pm.globals.set('email', email)
+// 19. Unverified Account
+pm.test("Create New Coordinator - Unverified Account", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/api/v1/example',
+        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email18" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
-                "name": "Ridhan Fadhilah",
-                "nik": "101RDHN" + pm.collectionVariables.get("var_increment"),
-                "phone": "081222123" + pm.collectionVariables.get("var_increment"),
+                "name": "AUTOTEST ENAM MEI",
+                "nik": "119AUTO" + pm.collectionVariables.get("var_increment"),
+                "phone": "081220119" + pm.collectionVariables.get("var_increment"),
                 "previousNik": "string",
                 "status": "active",
                 "verified": false
             })
         }
     }, function (err, res) {
+        console.info("Unverified Account : " + res.responseTime)
         pm.expect(res).to.have.property('code', 201); // Created
         pm.expect(res.json()).to.have.property('status', '01');
         pm.expect(res.json()).to.have.property('httpStatus', 'CREATED');
         pm.expect(res.json()).to.have.property('message', 'success');
         pm.expect(res.json().data).to.have.property('verified', false)
-        console.info("Unverified Account : " + res.responseTime)
     });
 })
