@@ -1,5 +1,5 @@
 // 1. CREATED
-pm.test("Create New Coordinator - CREATED", function () {
+pm.test("Example Test Case - CREATED", function () {
     pm.response.to.be.success;
     pm.response.to.be.withBody;
     pm.response.to.be.json;
@@ -12,9 +12,9 @@ pm.test("Create New Coordinator - CREATED", function () {
 })
 
 // 2. UNAUTHORIZED
-pm.test("Create New Coordinator - UNAUTHORIZED", function () {
+pm.test("Example Test Case - UNAUTHORIZED", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json'
@@ -25,7 +25,7 @@ pm.test("Create New Coordinator - UNAUTHORIZED", function () {
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email02" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -48,20 +48,20 @@ pm.test("Create New Coordinator - UNAUTHORIZED", function () {
 })
 
 // 3. Empty Name
-pm.test("Create New Coordinator - Empty Name", function () {
+pm.test("Example Test Case - Empty Name", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email03" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -84,20 +84,20 @@ pm.test("Create New Coordinator - Empty Name", function () {
 })
 
 // 4. Empty NIK
-pm.test("Create New Coordinator - Empty NIK", function () {
+pm.test("Example Test Case - Empty NIK", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email04" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -120,20 +120,20 @@ pm.test("Create New Coordinator - Empty NIK", function () {
 })
 
 // 5. NIK < 10 Character
-pm.test("Create New Coordinator - NIK < 10 Character", function () {
+pm.test("Example Test Case - NIK < 10 Character", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email05" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -156,20 +156,20 @@ pm.test("Create New Coordinator - NIK < 10 Character", function () {
 })
 
 // 6. NIK > 10 Character
-pm.test("Create New Coordinator - NIK > 10 Character", function () {
+pm.test("Example Test Case - NIK > 10 Character", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email06" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -192,20 +192,20 @@ pm.test("Create New Coordinator - NIK > 10 Character", function () {
 })
 
 // 7. Invalid NIK
-pm.test("Create New Coordinator - Invalid NIK", function () {
+pm.test("Example Test Case - Invalid NIK", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email07" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -228,20 +228,20 @@ pm.test("Create New Coordinator - Invalid NIK", function () {
 })
 
 // 8. Existing NIK
-pm.test("Create New Coordinator - Existing NIK", function () {
+pm.test("Example Test Case - Existing NIK", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email08" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -264,13 +264,13 @@ pm.test("Create New Coordinator - Existing NIK", function () {
 })
 
 // 9. Empty Email
-pm.test("Create New Coordinator - Empty Email", function () {
+pm.test("Example Test Case - Empty Email", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
@@ -300,13 +300,13 @@ pm.test("Create New Coordinator - Empty Email", function () {
 })
 
 // 10. Invalid Email
-pm.test("Create New Coordinator - Invalid Email", function () {
+pm.test("Example Test Case - Invalid Email", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
@@ -336,13 +336,13 @@ pm.test("Create New Coordinator - Invalid Email", function () {
 })
 
 // 11. Existing Email
-pm.test("Create New Coordinator - Existing Email", function () {
+pm.test("Example Test Case - Existing Email", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
@@ -372,20 +372,20 @@ pm.test("Create New Coordinator - Existing Email", function () {
 })
 
 // 12. Empty Phone
-pm.test("Create New Coordinator - Empty Phone", function () {
+pm.test("Example Test Case - Empty Phone", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email12" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -408,20 +408,20 @@ pm.test("Create New Coordinator - Empty Phone", function () {
 })
 
 // 13. Invalid Phone (Char)
-pm.test("Create New Coordinator - Invalid Phone (Char)", function () {
+pm.test("Example Test Case - Invalid Phone (Char)", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email13" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -444,20 +444,20 @@ pm.test("Create New Coordinator - Invalid Phone (Char)", function () {
 })
 
 // 14. Phone < 3 Number
-pm.test("Create New Coordinator - Phone < 3 Number", function () {
+pm.test("Example Test Case - Phone < 3 Number", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email14" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -480,20 +480,20 @@ pm.test("Create New Coordinator - Phone < 3 Number", function () {
 })
 
 // 15. Phone Not Start With 08
-pm.test("Create New Coordinator - Phone Not Start With 08", function () {
+pm.test("Example Test Case - Phone Not Start With 08", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email15" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -516,20 +516,20 @@ pm.test("Create New Coordinator - Phone Not Start With 08", function () {
 })
 
 // 16. Existing Phone
-pm.test("Create New Coordinator - Existing Phone", function () {
+pm.test("Example Test Case - Existing Phone", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email16" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -552,20 +552,20 @@ pm.test("Create New Coordinator - Existing Phone", function () {
 })
 
 // 17. Status Inactive
-pm.test("Create New Coordinator - Status Inactive", function () {
+pm.test("Example Test Case - Status Inactive", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": pm.globals.get('email'),
+                "email": "email17" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -588,20 +588,20 @@ pm.test("Create New Coordinator - Status Inactive", function () {
 })
 
 // 18. Invalid Status
-pm.test("Create New Coordinator - Invalid Status", function () {
+pm.test("Example Test Case - Invalid Status", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": "email17" + pm.globals.get('email'),
+                "email": "email18" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
@@ -624,20 +624,20 @@ pm.test("Create New Coordinator - Invalid Status", function () {
 })
 
 // 19. Unverified Account
-pm.test("Create New Coordinator - Unverified Account", function () {
+pm.test("Example Test Case - Unverified Account", function () {
     pm.sendRequest({
-        url: pm.collectionVariables.get("url") + '/user/api/coordinator/new',
+        url: pm.collectionVariables.get("url") + '/api/v1/example',
         method: 'POST',
         header: {
             'content-type': 'application/json',
-            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("bo_token")
+            'Authorization': 'Bearer' + ' ' + pm.collectionVariables.get("jwt_token")
         },
         body: {
             mode: 'raw',
             raw: JSON.stringify({
                 "createdBy": "rfadhil",
                 "createdDate": pm.globals.Now,
-                "email": "email18" + pm.globals.get('email'),
+                "email": "email19" + pm.globals.get('email'),
                 "id": 0,
                 "lastModifiedBy": "rfadhil",
                 "lastModifiedDate": pm.globals.Now,
